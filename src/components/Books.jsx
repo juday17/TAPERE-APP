@@ -2,16 +2,14 @@ import React, { useState, useEffect } from "react";
 import Book from "./Book";
 import SearchFilter from "./SearchFilter";
 
-//  THIS IS A FUNCTION TO GENERATE A RANDOM DATE WITHIN THE NEXT 30 DAYS TO EACH BOOKS THAT IS CHECKED OUT
 const generateRandomDate = () => {
   const today = new Date();
-  const randomDays = Math.floor(Math.random() * 30) + 1; // THIS WILL ENSURES AT LEAST 1 DAY FROM NOW
+  const randomDays = Math.floor(Math.random() * 30) + 1;
   const dueDate = new Date(today);
   dueDate.setDate(today.getDate() + randomDays);
   return dueDate.toISOString().split("T")[0];
 };
 
-// SAMPLE BOOK DATA
 const booksData = [
   {
     title: "Start with Why: How Great Leaders Inspire Everyone to Take Action",
@@ -26,7 +24,7 @@ const booksData = [
     status: "AVAILABLE",
   },
   {
-    title: "Good to Great ",
+    title: "Good to Great",
     author: "MIKE",
     dueDate: generateRandomDate(),
     status: "CHECKED OUT",
@@ -55,9 +53,14 @@ const booksData = [
     dueDate: generateRandomDate(),
     status: "CHECKED OUT",
   },
-  { title: "I Can Dream ", author: "JARIE", dueDate: "", status: "AVAILABLE" },
   {
-    title: "The Secret ",
+    title: "I Can Dream",
+    author: "JARIE",
+    dueDate: "",
+    status: "AVAILABLE",
+  },
+  {
+    title: "The Secret",
     author: "JOHN",
     dueDate: generateRandomDate(),
     status: "CHECKED OUT",
@@ -78,8 +81,10 @@ const Books = () => {
   useEffect(() => {
     if (searchQuery) {
       setFilteredBooks(
-        books.filter((book) =>
-          book.title.toLowerCase().includes(searchQuery.toLowerCase())
+        books.filter(
+          (book) =>
+            book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            book.author.toLowerCase().includes(searchQuery.toLowerCase())
         )
       );
     } else {
@@ -92,7 +97,7 @@ const Books = () => {
     newBooks[index].status =
       newBooks[index].status === "CHECKED OUT" ? "AVAILABLE" : "CHECKED OUT";
     newBooks[index].dueDate =
-      newBooks[index].status === "CHECKED OUT" ? generateRandomDate() : ""; // THIS IS TO CLEAR THE DUE DATE OR N/A IF THE STATUS IS CHANGED TO AVAILABLE
+      newBooks[index].status === "CHECKED OUT" ? generateRandomDate() : "";
     setBooks(newBooks);
   };
 
