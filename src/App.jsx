@@ -1,12 +1,13 @@
 import React from "react";
-import Employees from "./components/Employees";
+import Books from "./components/Books";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Employees />
+    <div className="container">
+      <h1>LIBRARY BOOKS</h1>
+      <Books />
     </div>
   );
-}
+};
 
 export default App;
